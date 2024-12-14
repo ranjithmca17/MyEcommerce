@@ -1,13 +1,14 @@
 import  './NewCollections.css';
 import new_collection from '../Assets/new_collections';
 import Item from '../Item/Item';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ShopContext } from '../../Context/ShopContext';
 
 const NewCollections = () => {
   const [newCollection, setNewCollection] = useState([]);
-
+    const { API} =useContext(ShopContext);
   useEffect(()=> {
-    fetch('http://localhost/4000/newcollections')
+    fetch(API+'/newcollections')
     .then((res)=> res.json())
     .then((data)=> setNewCollection(data));
   }, [])

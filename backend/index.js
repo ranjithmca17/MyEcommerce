@@ -45,6 +45,19 @@ app.post('/upload',upload.single('product'), async(req,res)=>{
   })
 });
 
+app.get("/", async (req, res) => {
+    try {
+      // Sending a success response if everything works fine
+      res.json({ success: true, message: "API is working successfully" });
+    } catch (error) {
+      // Logging the error to the console for debugging
+      console.error("Error:", error);
+      
+      // Sending an error response to the client
+      res.status(500).json({ success: false, message: "Error occurred", error: error.message });
+    }
+  });
+  
 app.post('/add-product', async(req,res)=>{
     try {
        let products = await Products.find({});

@@ -11,14 +11,14 @@ const getDefaultCart = ()=>{
 
     return cart;
 }
-
+const API="https://myecommerce-backend-zwfl.onrender.com";
 
 const ShopContextProvider = (props) => {
   const [all_product, setAll_product] =  useState([])
   const [cartItems, setCartItems] = useState(getDefaultCart());
  
   useEffect(()=>{
-   fetch("http://localhost:4000/allproducts").then((res)=> res.json()).then((data) => setAll_product(data))
+   fetch(API+"/allproducts").then((res)=> res.json()).then((data) => setAll_product(data))
   
   }, [])
 
@@ -26,7 +26,7 @@ const ShopContextProvider = (props) => {
  setCartItems((prev)=>({...prev, [itemId]: prev[itemId]+1}));
 //  console.log(cartItems)
 if(localStorage.getItem('auth-token')){
-  fetch('http://localhost:4000/addtocart', {
+  fetch(API+'/addtocart', {
     method: "POST",
     headers: {
       Accept: 'application/form-data',
