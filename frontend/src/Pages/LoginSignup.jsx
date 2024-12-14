@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./CSS/LoginSignup.css";
+import { ShopContext } from "../Context/ShopContext";
 
 function LoginSignup() {
   const [state, setState] = useState("Login");
@@ -8,7 +9,7 @@ function LoginSignup() {
     email: "",
     password: "",
   });
-
+    const { API} =useContext(ShopContext);
   const changeHandler = (e) => {
     console.log(formData);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,7 +17,7 @@ function LoginSignup() {
 
   const handleLogin = async () => {
     console.log("login clicked");
-    const res = await fetch("http://localhost:4000/login", {
+    const res = await fetch(API+"/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -36,7 +37,7 @@ function LoginSignup() {
 
   const handleSignup = async () => {
     console.log("signup clicked");
-    const res = await fetch("http://localhost:4000/signup", {
+    const res = await fetch(API+"/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
